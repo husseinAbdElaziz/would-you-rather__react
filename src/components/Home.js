@@ -1,32 +1,96 @@
-import React, { useEffect } from 'react';
-import { Container } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { Component } from 'react';
+import { Container, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import { handleGetQuestions } from '../actions';
 import QuestionCard from './QuestionCard';
 
-const Home = (props) => {
-  // get questions
-  const { questions, users } = useSelector((state) => state);
+class Home extends Component {
+  // types
+  ANSWERED_QUESTION = 'answered';
+  UNANSWERED_QUESTION = 'unAnswered';
 
-  const dispatch = useDispatch();
+  state = {
+    filterdQuestions: '',
+    answeredQuestions: '',
+    unAnsweredQuestions: '',
+    activeList: '',
+  };
 
-  useEffect(() => {
-    dispatch(handleGetQuestions());
-  }, [dispatch]);
+  componentDidMount() {
+    const { questions, users, loggedInUser } = this.props;
+    this.props.dispatch(handleGetQuestions());
 
-  console.log('questions', questions);
-  return (
-    <Container className='d-flex flex-column align-items-center'>
-      {questions &&
-        Object?.keys(questions)?.map((question) => (
-          <QuestionCard
-            key={question}
-            author={users[questions[question]?.author]}
-            question={questions[question]}
-          />
-        ))}
-    </Container>
-  );
-};
+    // current logged in user answered questions
+    const loggedInUserAnswers = Object.keys(users[loggedInUser]?.answers || {});
 
-export default Home;
+    const answeredQuestions = Object.keys(questions)
+      ?.filter((question) => loggedInUserAnswers.includes(question))
+      .sort((a, b) => b.timestamp - a.timestamp);
+
+    const unAnsweredQuestions = Object.keys(questions)
+      ?.filter((question) => !loggedInUserAnswers.includes(question))
+      .sort((a, b) => b.timestamp - a.timestamp);
+
+    this.setState({
+      answeredQuestions,
+      unAnsweredQuestions,
+      filterdQuestions: answeredQuestions,
+    });
+  }
+
+  setActiveList = (activeList) => {
+    if (activeList === this.ANSWERED_QUESTION) {
+      this.setState({
+        activeList,
+        filterdQuestions: this.state.answeredQuestions,
+      });
+    } else {
+      this.setState({
+        activeList,
+        filterdQuestions: this.state.unAnsweredQuestions,
+      });
+    }
+  };
+
+  render() {
+    const { questions, users } = this.props;
+
+    return (
+      <Container className='d-flex flex-column align-items-center'>
+        <div className='navs'>
+          <Button
+            variant='dark'
+            className='mx-1'
+            onClick={() => this.setActiveList(this.ANSWERED_QUESTION)}
+          >
+            Answered Question
+          </Button>
+          <Button
+            variant='dark'
+            className='mx-1'
+            onClick={() => this.setActiveList(this.UNANSWERED_QUESTION)}
+          >
+            unanswered Question
+          </Button>
+        </div>
+        <div>
+          {this.state.filterdQuestions &&
+            this.state.filterdQuestions?.map((question) => (
+              <QuestionCard
+                key={question}
+                author={users[questions[question]?.author]}
+                question={questions[question]}
+              />
+            ))}
+        </div>
+      </Container>
+    );
+  }
+}
+
+const mapStateToProps = ({ questions, users, loggedInUser }) => ({
+  questions,
+  users,
+  loggedInUser,
+});
+export default connect(mapStateToProps)(Home);

@@ -14,13 +14,16 @@ const QuestionCard = (props) => {
           alt={`avatar: ${question?.author}`}
         />
         <span className='d-inline-block mx-2'>{question?.author}:</span>
+        <span className='d-inline-block mx-2'>
+          {new Date(question?.timestamp).toLocaleDateString()}
+        </span>
       </Card.Header>
       <Card.Body>
         <p>
           {question?.optionOne?.text} Or {question?.optionTwo?.text}{' '}
         </p>
 
-        <Link to={`/question/${question.id}`}>
+        <Link to={`/question/${question?.id}`}>
           <Button variant='dark'>Answer Question</Button>
         </Link>
       </Card.Body>

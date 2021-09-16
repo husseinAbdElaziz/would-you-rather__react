@@ -9,11 +9,13 @@ const Question = (props) => {
 
   const { author, optionOne, optionTwo } = questions[id] || {};
 
+  const radioInputStyle = { fontWeight: 'bold', margin: '10px 0' };
+
   return (
     <Container className='d-flex flex-column align-items-center mt-5'>
       <Image
         roundedCircle
-        src={users[author].avatarURL}
+        src={users[author]?.avatarURL}
         className='mb-4'
         alt={`avatar: ${author}`}
         style={{ width: '100px' }}
@@ -26,13 +28,16 @@ const Question = (props) => {
           label={optionOne?.text}
           name='answer'
           value={optionOne?.text}
-          // id={`disabled-default-${type}`}
+          style={radioInputStyle}
+          id='1'
         />
         <Form.Check
           type='radio'
           label={optionTwo?.text}
           name='answer'
           value={optionTwo?.text}
+          style={radioInputStyle}
+          id='2'
         />
       </Form>
 
