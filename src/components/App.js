@@ -6,13 +6,15 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 // state management
 import { connect } from 'react-redux';
 
+import { LoadingBar } from 'react-redux-loading';
+
 import { handleIniteData } from '../actions';
 
 // components
 import Login from './Login';
 import NavBar from './NavBar';
 import Home from './Home';
-import { LoadingBar } from 'react-redux-loading';
+import Question from './Question';
 
 class App extends Component {
   componentDidMount() {
@@ -38,6 +40,7 @@ class App extends Component {
 
           <Route path='/' exact component={Home} />
           <Route path='/login' component={Login} />
+          <Route path='/question/:id' component={Question} />
         </Fragment>
       </Router>
     );

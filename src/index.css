@@ -7,3 +7,12 @@ a[href]:hover,
 a[href].active {
     color: black
 }
+
+
+.avatar {
+    width: 50px;
+}
+
+.pointer {
+    cursor: pointer;
+}

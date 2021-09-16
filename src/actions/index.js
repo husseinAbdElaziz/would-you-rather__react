@@ -1,8 +1,9 @@
 import { showLoading, hideLoading } from 'react-redux-loading';
 import { getUsers } from './userActions';
-import { _getUsers } from '../utils/Data';
+import { _getUsers, _getQuestions } from '../utils/Data';
+import { getQuetions } from './questionsAction';
 
-export function handleIniteData() {
+export const handleIniteData = () => {
   return (dispatch) => {
     dispatch(showLoading());
     return _getUsers().then((users) => {
@@ -10,4 +11,12 @@ export function handleIniteData() {
       dispatch(hideLoading());
     });
   };
-}
+};
+
+export const handleGetQuestions = () => {
+  return (dispatch) => {
+    return _getQuestions().then((questions) => {
+      dispatch(getQuetions(questions));
+    });
+  };
+};

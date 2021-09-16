@@ -1,6 +1,6 @@
 import { LOGIN_USER, LOGOUT_USER } from '../types';
 
-const authReducer = (userstate = null, action) => {
+export const authUser = (userstate = null, action) => {
   switch (action.type) {
     case LOGIN_USER:
       const { userId } = action.payload;
@@ -11,5 +11,3 @@ const authReducer = (userstate = null, action) => {
       return userstate;
   }
 };
-
-export default authReducer;
