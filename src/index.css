@@ -9,6 +9,10 @@ a[href].active {
 }
 
 
+.vh-80 {
+    height: 80vh;
+}
+
 .avatar {
     width: 50px;
 }

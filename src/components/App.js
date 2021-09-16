@@ -28,7 +28,7 @@ class App extends Component {
         <Fragment>
           <LoadingBar />
 
-          <NavBar />
+          {loggedInUser && <NavBar />}
 
           {!loggedInUser && (
             <Redirect

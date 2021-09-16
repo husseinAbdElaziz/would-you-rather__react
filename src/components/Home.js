@@ -13,7 +13,7 @@ class Home extends Component {
     filterdQuestions: '',
     answeredQuestions: '',
     unAnsweredQuestions: '',
-    activeList: '',
+    activeList: 'answered',
   };
 
   componentDidMount() {
@@ -59,15 +59,19 @@ class Home extends Component {
       <Container className='d-flex flex-column align-items-center'>
         <div className='navs'>
           <Button
-            variant='dark'
-            className='mx-1'
+            variant='light'
+            className={`mx-2 ${
+              this.state.activeList === this.ANSWERED_QUESTION && 'shadow'
+            }`}
             onClick={() => this.setActiveList(this.ANSWERED_QUESTION)}
           >
             Answered Question
           </Button>
           <Button
-            variant='dark'
-            className='mx-1'
+            variant='light'
+            className={`mx-2 ${
+              this.state.activeList === this.UNANSWERED_QUESTION && 'shadow'
+            }`}
             onClick={() => this.setActiveList(this.UNANSWERED_QUESTION)}
           >
             unanswered Question

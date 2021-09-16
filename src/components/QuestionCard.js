@@ -18,14 +18,15 @@ const QuestionCard = (props) => {
           {new Date(question?.timestamp).toLocaleDateString()}
         </span>
       </Card.Header>
-      <Card.Body>
-        <p>
-          {question?.optionOne?.text} Or {question?.optionTwo?.text}{' '}
-        </p>
-
-        <Link to={`/question/${question?.id}`}>
-          <Button variant='dark'>Answer Question</Button>
-        </Link>
+      <Card.Body className='text-center'>
+        <p className='mb-2'>{question?.optionOne?.text}</p>
+        <h6 className='font-weight-bold'>Or</h6>
+        <p>{question?.optionTwo?.text}</p>
+        {!question?.isAnswered && (
+          <Link to={`/question/${question?.id}`}>
+            <Button variant='dark'>Answer Question</Button>
+          </Link>
+        )}
       </Card.Body>
     </Card>
   );

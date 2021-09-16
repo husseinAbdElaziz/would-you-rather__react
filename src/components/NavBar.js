@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Image, Navbar } from 'react-bootstrap';
+import { Container, Navbar } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
@@ -20,21 +20,14 @@ const NavBar = () => {
           </NavLink>
         </Navbar.Brand>
         <Navbar.Toggle />
-        {!loggedInUser && (
-          <Navbar.Collapse className='justify-content-end'>
-            <NavLink to='/login'>Login</NavLink>
-          </Navbar.Collapse>
-        )}
         {loggedInUser && (
-          <div>
-            <Image
-              roundedCircle
-              className='avatar mx-2'
-              src={`https://avatars.dicebear.com/api/initials/${loggedInUser}.svg`}
-              alt={`avatar: ${loggedInUser}`}
-            />
+          <div className='d-flex align-items-center'>
+            <span className='font-weight-bold mx-3'>{loggedInUser}</span>
 
-            <span className='pointer' onClick={() => dispatch(logoutUser())}>
+            <span
+              className=' material-icons pointer'
+              onClick={() => dispatch(logoutUser())}
+            >
               logout
             </span>
           </div>

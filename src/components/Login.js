@@ -34,10 +34,7 @@ const Login = (props) => {
   };
 
   return (
-    <div
-      className='d-flex align-items-center justify-content-center'
-      style={{ height: '80vh' }}
-    >
+    <div className='vh-80 d-flex align-items-center justify-content-center'>
       <Container className='d-flex flex-column align-items-center flex-grow '>
         <h2> Welcome to Would You rather App </h2>
         <h5 className='my-3'> Please sign in to continue</h5>
