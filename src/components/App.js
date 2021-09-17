@@ -1,10 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 
 // react-router-dom
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 // state management
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { LoadingBar } from 'react-redux-loading';
 
@@ -16,37 +16,36 @@ import NavBar from './NavBar';
 import Home from './Home';
 import Question from './Question';
 
-class App extends Component {
-  componentDidMount() {
-    this.props.dispatch(handleIniteData());
-  }
+const App = () => {
+  const dispatch = useDispatch();
 
-  render() {
-    const { loggedInUser } = this.props;
-    return (
-      <Router>
-        <Fragment>
-          <LoadingBar />
+  useEffect(() => {
+    dispatch(handleIniteData());
+  }, [dispatch]);
 
-          {loggedInUser && <NavBar />}
+  const { loggedInUser } = useSelector((state) => state);
 
-          {!loggedInUser && (
-            <Redirect
-              to={{
-                pathname: '/login',
-              }}
-            />
-          )}
+  return (
+    <Router>
+      <Fragment>
+        <LoadingBar />
 
-          <Route path='/' exact component={Home} />
-          <Route path='/login' component={Login} />
-          <Route path='/question/:id' component={Question} />
-        </Fragment>
-      </Router>
-    );
-  }
-}
+        {loggedInUser && <NavBar />}
 
-const maoStateToProps = ({ loggedInUser }) => ({ loggedInUser });
+        {!loggedInUser && (
+          <Redirect
+            to={{
+              pathname: '/login',
+            }}
+          />
+        )}
 
-export default connect(maoStateToProps)(App);
+        <Route path='/' exact component={Home} />
+        <Route path='/login' component={Login} />
+        <Route path='/question/:id' component={Question} />
+      </Fragment>
+    </Router>
+  );
+};
+
+export default App;
