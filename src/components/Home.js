@@ -83,6 +83,7 @@ class Home extends Component {
               <QuestionCard
                 key={question}
                 author={users[questions[question]?.author]}
+                loggedInUser={this.props.loggedInUser}
                 question={questions[question]}
               />
             ))}
