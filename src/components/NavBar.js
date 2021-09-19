@@ -3,7 +3,7 @@ import { Container, Navbar } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { logoutUser } from '../actions/authAction';
 
 const NavBar = () => {
@@ -22,6 +22,8 @@ const NavBar = () => {
         <Navbar.Toggle />
         {loggedInUser && (
           <div className='d-flex align-items-center'>
+            <Link to='/add'> add new question</Link>
+
             <span className='font-weight-bold mx-3'>{loggedInUser}</span>
 
             <span

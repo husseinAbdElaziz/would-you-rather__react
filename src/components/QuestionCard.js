@@ -7,8 +7,8 @@ const QuestionCard = (props) => {
   const { question, author, loggedInUser } = props;
 
   const isVoted = isPollVoted(
-    question.optionOne,
-    question.optionTwo,
+    question?.optionOne,
+    question?.optionTwo,
     loggedInUser
   );
 
@@ -29,7 +29,7 @@ const QuestionCard = (props) => {
       <Card.Body className='text-center'>
         <p
           className={`mb-2 ${
-            question?.optionOne.votes.includes(loggedInUser) && 'user__vote'
+            question?.optionOne?.votes?.includes(loggedInUser) && 'user__vote'
           }`}
         >
           {question?.optionOne?.text}
@@ -37,7 +37,9 @@ const QuestionCard = (props) => {
         <h6 className='font-weight-bold'>Or</h6>
         <p
           className={
-            question?.optionTwo.votes.includes(loggedInUser) && 'user__vote'
+            question?.optionTwo?.votes?.includes(loggedInUser)
+              ? 'user__vote'
+              : ''
           }
         >
           {question?.optionTwo?.text}

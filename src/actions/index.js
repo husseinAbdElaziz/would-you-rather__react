@@ -1,7 +1,7 @@
 import { showLoading, hideLoading } from 'react-redux-loading';
 import { getUsers } from './userActions';
-import { _getUsers, _getQuestions } from '../utils/Data';
-import { getQuetions } from './questionsAction';
+import { _getUsers, _getQuestions, _saveQuestion } from '../utils/Data';
+import { addNewQuestion, getQuetions } from './questionsAction';
 
 export const handleIniteData = () => {
   return (dispatch) => {
@@ -18,5 +18,18 @@ export const handleGetQuestions = () => {
     return _getQuestions().then((questions) => {
       dispatch(getQuetions(questions));
     });
+  };
+};
+
+export const handleAddQuestion = ({ optionOneText, optionTwoText, author }) => {
+  return (dispatch) => {
+    dispatch(showLoading());
+    return _saveQuestion({ optionOneText, optionTwoText, author }).then(
+      (questionRes) => {
+        console.log('resss', questionRes);
+        dispatch(addNewQuestion(questionRes));
+        dispatch(hideLoading());
+      }
+    );
   };
 };

@@ -42,3 +42,7 @@ a[href].active {
     right: 0;
     top: 0px;
 }
+
+.add-new-question {
+    max-width: 500px;
+}
