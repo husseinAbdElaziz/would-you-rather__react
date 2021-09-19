@@ -3,9 +3,7 @@ import { Container, Form, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser } from '../actions/authAction';
 
-const Login = (props) => {
-  console.log(props);
-
+const Login = () => {
   const { users } = useSelector(({ users }) => ({ users }));
 
   const dispatch = useDispatch();
@@ -28,9 +26,6 @@ const Login = (props) => {
 
     // login
     dispatch(loginUser(loggedInUser));
-
-    // navigate to home
-    props.history.push('/');
   };
 
   return (

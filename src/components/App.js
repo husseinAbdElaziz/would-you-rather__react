@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 
 // react-router-dom
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // state management
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,6 +16,7 @@ import NavBar from './NavBar';
 import Home from './Home';
 import Question from './Question';
 import NewQuestion from './NewQuestion';
+import NotFounded from './NotFounded';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -34,19 +35,17 @@ const App = () => {
 
         {loggedInUser && <NavBar />}
 
-        {!loggedInUser && (
-          <Redirect
-            to={{
-              pathname: '/login',
-            }}
-          />
+        {!loggedInUser ? (
+          <Route component={Login} />
+        ) : (
+          <Switch>
+            <Route path='/' exact component={Home} />
+            <Route path='/add' component={NewQuestion} />
+            <Route path='/question/:id' component={Question} />
+            {/* <Route path='/leaderboard' component={Leaderboard} /> */}
+            <Route component={NotFounded} />
+          </Switch>
         )}
-
-        <Route path='/' exact component={Home} />
-        <Route path='/login' component={Login} />
-        <Route path='/add' component={NewQuestion} />
-        <Route path='/question/:id' component={Question} />
-        {/* <Route path='/leaderboard' component={Leaderboard} /> */}
       </Fragment>
     </Router>
   );
