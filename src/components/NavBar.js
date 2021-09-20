@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Navbar } from 'react-bootstrap';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
@@ -19,14 +19,21 @@ const NavBar = () => {
           </NavLink>
         </Navbar.Brand>
         <Navbar.Toggle />
+        <Navbar.Collapse id='basic-navbar-nav'>
+          <Nav className='ml-auto'>
+            <Link className='mx-3' to='/add'>
+              add new question
+            </Link>
+            <Link to='/leaderboard'> Leaderboard </Link>
+          </Nav>
+        </Navbar.Collapse>
+
         {loggedInUser && (
           <div className='d-flex align-items-center'>
-            <Link to='/add'> add new question</Link>
-
             <span className='font-weight-bold mx-3'>{loggedInUser}</span>
 
             <span
-              className=' material-icons pointer'
+              className='material-icons pointer'
               onClick={() => dispatch(logoutUser())}
             >
               logout

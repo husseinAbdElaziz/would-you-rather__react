@@ -17,6 +17,7 @@ import Home from './Home';
 import Question from './Question';
 import NewQuestion from './NewQuestion';
 import NotFounded from './NotFounded';
+import LeaderBoard from './LeaderBoard';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const App = () => {
             <Route path='/' exact component={Home} />
             <Route path='/add' component={NewQuestion} />
             <Route path='/question/:id' component={Question} />
-            {/* <Route path='/leaderboard' component={Leaderboard} /> */}
+            <Route path='/leaderboard' component={LeaderBoard} />
             <Route component={NotFounded} />
           </Switch>
         )}

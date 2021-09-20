@@ -1,4 +1,8 @@
-import { GET_USERS, USER_ANSWER_QUESTION } from '../types';
+import {
+  USER_ADD_NEW_QUESTION,
+  GET_USERS,
+  USER_ANSWER_QUESTION,
+} from '../types';
 
 export const users = (userState = {}, action) => {
   switch (action.type) {
@@ -18,6 +22,20 @@ export const users = (userState = {}, action) => {
             ...userState[loggedInUser]?.answers,
             [qid]: answer,
           },
+        },
+      };
+
+    case USER_ADD_NEW_QUESTION:
+      const { qid: id, author } = action.payload;
+
+      console.log('id', id);
+      console.log('author', author);
+
+      return {
+        ...userState,
+        [author]: {
+          ...userState[author],
+          questions: userState[author]?.questions?.concat(id),
         },
       };
     default:

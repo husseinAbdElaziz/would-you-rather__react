@@ -1,5 +1,9 @@
 import { showLoading, hideLoading } from 'react-redux-loading';
-import { getUsers, userAddAnswerToQuestion } from './userActions';
+import {
+  getUsers,
+  userAddAnswerToQuestion,
+  userAddNewQuestion,
+} from './userActions';
 import {
   _getUsers,
   _getQuestions,
@@ -32,6 +36,7 @@ export const handleAddQuestion = ({ optionOneText, optionTwoText, author }) => {
     return _saveQuestion({ optionOneText, optionTwoText, author }).then(
       (questionRes) => {
         dispatch(addNewQuestion(questionRes));
+        dispatch(userAddNewQuestion({ qid: questionRes.id, author }));
         dispatch(hideLoading());
       }
     );
