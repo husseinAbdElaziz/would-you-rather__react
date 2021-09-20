@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Image, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { isPollVoted } from '../utils/helpers';
+import { calcPercentage, isPollVoted } from '../utils/helpers';
 
 const QuestionCard = (props) => {
   const { question, author, loggedInUser } = props;
@@ -33,6 +33,9 @@ const QuestionCard = (props) => {
           }`}
         >
           {question?.optionOne?.text}
+          {isVoted && (
+            <h5>{calcPercentage(question?.optionOne, question?.optionTwo)}</h5>
+          )}
         </p>
         <h6 className='font-weight-bold'>Or</h6>
         <p
@@ -43,6 +46,11 @@ const QuestionCard = (props) => {
           }
         >
           {question?.optionTwo?.text}
+          {isVoted && (
+            <h5>
+              {calcPercentage(question?.optionOne, question?.optionTwo, false)}
+            </h5>
+          )}
         </p>
         {!isVoted && (
           <Link to={`/question/${question?.id}`}>

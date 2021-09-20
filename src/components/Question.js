@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Form, Image, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { isPollVoted } from '../utils/helpers';
+import { calcPercentage, isPollVoted } from '../utils/helpers';
 
 import { handleAnswerQuestion } from '../actions';
 
@@ -48,6 +48,7 @@ const Question = (props) => {
             }`}
           >
             {optionOne?.text}
+            <h5>{calcPercentage(optionOne, optionTwo)}</h5>
           </p>
           <h6 className='font-weight-bold'>Or</h6>
           <p
@@ -56,6 +57,7 @@ const Question = (props) => {
             }
           >
             {optionTwo?.text}
+            <h5>{calcPercentage(optionOne, optionTwo, false)}</h5>
           </p>
         </div>
       )}
