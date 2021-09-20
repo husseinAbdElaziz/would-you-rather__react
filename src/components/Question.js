@@ -42,23 +42,25 @@ const Question = (props) => {
 
       {isVoted && (
         <div className='text-center'>
-          <p
+          <div
             className={`mb-2 ${
               optionOne?.votes?.includes(loggedInUser) ? 'user__vote px-3' : ''
             }`}
           >
             {optionOne?.text}
+            <h5> votes: {optionOne?.votes?.length || 0}</h5>
             <h5>{calcPercentage(optionOne, optionTwo)}</h5>
-          </p>
+          </div>
           <h6 className='font-weight-bold'>Or</h6>
-          <p
+          <div
             className={
               optionTwo?.votes?.includes(loggedInUser) ? 'user__vote px-3' : ''
             }
           >
             {optionTwo?.text}
-            <h5>{calcPercentage(optionOne, optionTwo, false)}</h5>
-          </p>
+            <h5> votes: {optionTwo?.votes?.length || 0}</h5>
+            <h5> {calcPercentage(optionOne, optionTwo, false)}</h5>
+          </div>
         </div>
       )}
 

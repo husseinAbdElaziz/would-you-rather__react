@@ -8,10 +8,6 @@ export const calcPercentage = (optionOne, optionTwo, isOptionOne = true) => {
 
   const optionToCalc = isOptionOne ? optionOneVotesCont : optionTwoVotesCont;
 
-  console.log('optionOneVotesCont', optionOneVotesCont);
-  console.log('optionTwoVotesCont', optionTwoVotesCont);
-  console.log('optionToCalc', optionToCalc);
-
   return `${(Math.ceil((optionToCalc / totalVotesCount) * 10000) / 100).toFixed(
     0
   )}%`;

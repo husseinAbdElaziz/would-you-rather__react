@@ -27,7 +27,7 @@ const QuestionCard = (props) => {
         </span>
       </Card.Header>
       <Card.Body className='text-center'>
-        <p
+        <div
           className={`mb-2 ${
             question?.optionOne?.votes?.includes(loggedInUser) && 'user__vote'
           }`}
@@ -36,9 +36,9 @@ const QuestionCard = (props) => {
           {isVoted && (
             <h5>{calcPercentage(question?.optionOne, question?.optionTwo)}</h5>
           )}
-        </p>
+        </div>
         <h6 className='font-weight-bold'>Or</h6>
-        <p
+        <div
           className={
             question?.optionTwo?.votes?.includes(loggedInUser)
               ? 'user__vote'
@@ -51,12 +51,12 @@ const QuestionCard = (props) => {
               {calcPercentage(question?.optionOne, question?.optionTwo, false)}
             </h5>
           )}
-        </p>
-        {!isVoted && (
-          <Link to={`/question/${question?.id}`}>
-            <Button variant='dark'>Answer Question</Button>
-          </Link>
-        )}
+        </div>
+        <Link to={`/question/${question?.id}`}>
+          <Button variant='dark'>
+            {isVoted ? 'view details' : 'Answer Question'}
+          </Button>
+        </Link>
       </Card.Body>
     </Card>
   );
