@@ -10,7 +10,6 @@ const NavBar = () => {
   const loggedInUser = useSelector(({ loggedInUser }) => loggedInUser);
   const dispatch = useDispatch();
 
-  console.log('loggedInUser', loggedInUser);
   return (
     <Navbar>
       <Container>

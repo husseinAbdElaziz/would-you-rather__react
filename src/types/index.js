@@ -1,6 +1,7 @@
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const GET_USERS = 'GET_USERS';
+export const USER_ANSWER_QUESTION = 'USER_ANSWER_QUESTION';
 
 export const GET_QUESTIONS = 'GET_QUESTIONS';
 export const ADD_NEW_QUESTION = 'ADD_NEW_QUESTION';

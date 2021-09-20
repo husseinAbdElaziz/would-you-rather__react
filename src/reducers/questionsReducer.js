@@ -7,20 +7,22 @@ export const questions = (state = {}, action) => {
 
     case ADD_NEW_QUESTION:
       const question = action.payload;
-
-      console.log('question action', question);
-
       return {
         ...state,
         [question.id]: question,
       };
     case ANSWER_QUESTION:
-      // const { loggedInUser, qid, answer } = action;
+      const { answer, loggedInUser, qid } = action.payload;
+
       return {
         ...state,
-        //   [qid]: {
-        //   ...state[qid],
-        // }
+        [qid]: {
+          ...state[qid],
+          [answer]: {
+            ...state[qid][answer],
+            votes: state[qid][answer]?.votes?.concat(loggedInUser),
+          },
+        },
       };
 
     default:

@@ -7,7 +7,7 @@ export const addNewQuestion = (question) => ({
   payload: question,
 });
 
-export const answerQuestion = ({ authedUser, qid, answer }) => ({
+export const answerQuestion = (answer) => ({
   type: ANSWER_QUESTION,
-  payload: { answer, qid, authedUser },
+  payload: answer,
 });

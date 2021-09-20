@@ -15,8 +15,6 @@ class Home extends Component {
 
   componentDidMount() {
     const { questions } = this.props;
-
-    console.log('questions', questions);
     this.setState({ filterdQuestions: questions?.answered });
   }
 
@@ -78,10 +76,12 @@ class Home extends Component {
 const mapStateToProps = ({ questions: allQuestions, users, loggedInUser }) => {
   const loggedInUserAnswers = Object.keys(users[loggedInUser]?.answers || {});
 
-  const answered = Object.values(allQuestions)
+  console.log(loggedInUserAnswers);
+
+  const unAnswered = Object.values(allQuestions)
     .filter((question) => !loggedInUserAnswers.includes(question.id))
     .sort((a, b) => b.timestamp - a.timestamp);
-  const unAnswered = Object.values(allQuestions)
+  const answered = Object.values(allQuestions)
     .filter((question) => loggedInUserAnswers.includes(question.id))
     .sort((a, b) => b.timestamp - a.timestamp);
 
